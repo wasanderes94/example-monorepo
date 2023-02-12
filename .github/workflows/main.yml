@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  DOCUSAURUS_DIR: "/"
-
 jobs:
   extract:
     runs-on: ubuntu-20.04
@@ -32,10 +29,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Print Docusaurus
-      run: echo $DOCUSAURUS_DIR
+      uses: actions/checkout@v2
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
@@ -47,7 +41,6 @@ jobs:
       with:
         repository:  wasanderes94/websiteAction
         ref: main
-        path: $DOCUSAURUS_DIR
         token: ${{secrets.TOKEN}}
 
     - name: Install dependencies
@@ -57,7 +50,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: markdown
-        path: $DOCUSAURUS_DIR/pages/docs
+        path: pages/docs
 
     - name: Build website
       run: npm run build 
@@ -66,4 +59,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gh-pages
-        path: $DOCUSAURUS_DIR/build
+        path: build
