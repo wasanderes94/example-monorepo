@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  DOCUSAURUS_REPO: "https://github.com/wasanderes94/websiteAction"
+  DOCUSAURUS_REPO: "wasanderes94/websiteAction"
   DOCUSAURUS_DIR: "docs"
 
 jobs:
