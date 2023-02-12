@@ -44,8 +44,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: $DOCUSAURUS_REPO
-        ref: main
+        ref: master
         path: $DOCUSAURUS_DIR
+        token: ${{secrets.TOKEN}}
 
     - name: Install dependencies
       run: npm ci --prefix $DOCUSAURUS_DIR
