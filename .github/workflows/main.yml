@@ -16,7 +16,7 @@ jobs:
     - name: Find Markdown files
       run: |
         mkdir -p markdown
-        find . -iname '*.md' -exec cp --parents{} markdown \;
+        find . -type f -name '*.md' -exec cp --parents {} /markdown \;
         ls markdown
 
     - name: Deploy Markdown files
