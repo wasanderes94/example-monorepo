@@ -12,6 +12,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    
+    - name: Find Markdown files
+      run: |
+        mkdir markdown
+        find . -name "*.md" -exec cp \{\} markdown \;
+
+    - name: Deploy Markdown files
+      uses: actions/upload-artifact@v2
+      with:
+        name: markdown
+        path: markdown
 
   build:
     runs-on: ubuntu-20.04
@@ -40,11 +51,12 @@ jobs:
     - name: Create Docs directory
       run: mkdir docs
     
-    - name: Search and Copy MD Files
-      run: |
-        mkdir -p docs
-        find . -name '*.md' -exec cp --parents \{\} /docs \;
-
+    - name: Copy Markdown files
+      uses: actions/download-artifact@v2
+      with:
+        name: markdown
+        path: docs
+    
     - name: Build website
       run: npm run build 
 
