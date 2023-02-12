@@ -6,8 +6,8 @@ on:
       - master
 
 env:
-  DOCUSAURUS_REPO: "wasanderes94/websiteAction"
-  DOCUSAURUS_DIR: "docs"
+  DOCUSAURUS_REPO: wasanderes94/websiteAction
+  DOCUSAURUS_DIR: docs
 
 jobs:
   extract:
