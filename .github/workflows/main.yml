@@ -16,7 +16,11 @@ jobs:
     - name: Find Markdown files
       run: |
         mkdir -p markdown
-        find . -type f -name "*.md" -exec cp {} markdown \;
+        counter=0
+        find . -name '*.md' | while read f; do 
+          filename="$(basename "$f")"
+          cp "$f" "markdown/${filename%.*}-$((counter++)).md"
+        done
 
     - name: Deploy Markdown files
       uses: actions/upload-artifact@v3
