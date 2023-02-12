@@ -1,0 +1,66 @@
+name: Build and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCUSAURUS_REPO: "https://github.com/wasanderes94/website-action.git"
+  DOCUSAURUS_DIR: "docs"
+
+jobs:
+  extract:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Find Markdown files
+      run: |
+        mkdir markdown
+        find . -name "*.md" -exec cp {} markdown \;
+
+    - name: Deploy Markdown files
+      uses: actions/upload-artifact@v2
+      with:
+        name: markdown
+        path: markdown
+
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Checkout Docusaurus code
+      uses: actions/checkout@v2
+      with:
+        repository: $DOCUSAURUS_REPO
+        ref: main
+        path: $DOCUSAURUS_DIR
+
+    - name: Install dependencies
+      run: npm ci --prefix $DOCUSAURUS_DIR
+
+    - name: Copy Markdown files
+      uses: actions/download-artifact@v2
+      with:
+        name: markdown
+        path: $DOCUSAURUS_DIR/pages/docs
+
+    - name: Build website
+      run: npm run build --prefix $DOCUSAURUS_DIR
+
+    - name: Deploy website
+      uses: actions/upload-artifact@v2
+      with:
+        name: gh-pages
+        path: $DOCUSAURUS_DIR/build

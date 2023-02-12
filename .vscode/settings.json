@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-action.json": "file:///e%3A/Master%20Informatik/Projekt/example-monorepo/.github/workflows/action.yml",
+        "https://json.schemastore.org/github-workflow.json": "file:///e%3A/Master%20Informatik/Projekt/example-monorepo/.github/workflows/deploy.yml"
+    }
+}
