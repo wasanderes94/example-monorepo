@@ -43,7 +43,7 @@ jobs:
     - name: Search and Copy MD Files
       run: |
         mkdir -p docs
-        find -name '*.md' exec cp --parents \{\} /docs \;
+        find . -name '*.md' -exec cp --parents \{\} /docs \;
 
     - name: Build website
       run: npm run build 
