@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  DOCUSAURUS_DIR: docs
-
 jobs:
   extract:
     runs-on: ubuntu-20.04
@@ -48,7 +45,7 @@ jobs:
         token: ${{secrets.TOKEN}}
 
     - name: Install dependencies
-      run: npm ci --prefix $DOCUSAURUS_DIR
+      run: npm ci 
 
     - name: Copy Markdown files
       uses: actions/download-artifact@v2
@@ -57,7 +54,7 @@ jobs:
         path: $DOCUSAURUS_DIR/pages/docs
 
     - name: Build website
-      run: npm run build --prefix $DOCUSAURUS_DIR
+      run: npm run build 
 
     - name: Deploy website
       uses: actions/upload-artifact@v2
