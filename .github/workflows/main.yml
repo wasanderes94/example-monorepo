@@ -16,7 +16,7 @@ jobs:
     - name: Find Markdown files
       run: |
         mkdir markdown
-        find . -name "*.md" -exec cp {} markdown \;
+        find . -name "*.md" -exec cp \{\} markdown \;
 
     - name: Deploy Markdown files
       uses: actions/upload-artifact@v3
