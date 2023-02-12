@@ -47,12 +47,15 @@ jobs:
 
     - name: Install dependencies
       run: npm ci 
+    
+    - name: Create Docs directory
+      run: mkdir docs
 
     - name: Copy Markdown files
       uses: actions/download-artifact@v3
       with:
         name: markdown
-        path: pages/docs
+        path: docs
 
     - name: Build website
       run: npm run build 
