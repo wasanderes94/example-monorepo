@@ -16,8 +16,8 @@ jobs:
     - name: Find Markdown files
       run: |
         mkdir -p markdown
-        find . -name '*.md* | cpio -pdm /markdown 
-        
+        find . -name '*.md' | cpio -pdm /markdown
+    
     - name: Deploy Markdown files
       uses: actions/upload-artifact@v3
       with:
