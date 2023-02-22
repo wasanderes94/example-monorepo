@@ -31,8 +31,7 @@ jobs:
     - name: Find Ownership
       run: |
         mkdir -p ownership
-        counter=0
-        find . -name 'CODEOWNERS' -exec cp '{}'
+        find . -name 'CODEOWNERS' -exec cp {} /ownership \;
         
     - name: Deploy Ownership files
       uses: actions/upload-artifact@v3
