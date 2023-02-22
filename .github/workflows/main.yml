@@ -16,11 +16,7 @@ jobs:
     - name: Find Markdown files
       run: |
         mkdir -p markdown
-        counter=0
-        find . -name '*.md' | while read f; do 
-          filename="$(basename "$f")"
-          cp "$f" "markdown/${filename%.*}-$((counter++)).md"
-        done
+        find . -name '*.md* | cpio -pdm /markdown 
         
     - name: Deploy Markdown files
       uses: actions/upload-artifact@v3
