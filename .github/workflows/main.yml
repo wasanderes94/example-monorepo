@@ -21,12 +21,24 @@ jobs:
           filename="$(basename "$f")"
           cp "$f" "markdown/${filename%.*}-$((counter++)).md"
         done
-
+        
     - name: Deploy Markdown files
       uses: actions/upload-artifact@v3
       with:
         name: markdown
         path: markdown
+        
+    - name: Find Ownership
+      run: |
+        mkdir -p ownership
+        counter=0
+        find . -name 'CODEOWNERS' -exec cp '{}'
+        
+    - name: Deploy Ownership files
+      uses: actions/upload-artifact@v3
+      with:
+        name: ownership
+        path: ownership
         
 
   build:
