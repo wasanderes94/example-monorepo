@@ -33,8 +33,18 @@ jobs:
       with:
         name: ownership
         path: ownership
+    
+    - name: Find Diagram.jpg
+      run: |
+        mkdir -p images
+        find . -name 'diagram.jpg' -exec cp {} images \;
         
-
+    - name: Deploy Diagram.jpg
+      uses: actions/upload-artifact@v3
+      with:
+        name: images
+        path: images
+        
   build:
     runs-on: ubuntu-20.04
     permissions:
@@ -60,13 +70,27 @@ jobs:
       run: npm ci 
     
     - name: Create Docs directory
-      run: mkdir docs
+      run: |
+        mkdir docs
+        mkdir images
     
     - name: Copy Markdown files
       uses: actions/download-artifact@v2
       with:
         name: markdown
         path: docs
+    
+    - name: Copy OWNERSHIPS file
+      uses: actions/download-artifact@v2
+      with:
+        name: ownership
+        path: docs
+        
+    - name: Copy Diagram
+      uses: actions/download-artifact@v2
+      with:
+        name: images
+        path: images
     
     - name: Build website
       run: npm run build 
